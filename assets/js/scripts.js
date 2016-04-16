@@ -1,11 +1,11 @@
 // var groups = [];
 
-// function Channel(displayName, game, logo, url) {
-//   this.displayName = displayName;
-//   this.game = game;
-//   this.logo = logo;
-//   this.url = url;
-// }
+function Channel(displayName, game, logo, url) {
+  this.displayName = displayName;
+  this.game = game;
+  this.logo = logo;
+  this.url = url;
+}
 
 // function getChannels(){
 //   var arr = ["voyboy","imaqtpie","freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","noobs2ninjas","beohoff"];
@@ -29,28 +29,31 @@
 var arr = ["voyboy","imaqtpie","freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","noobs2ninjas","beohoff"];
 var groups = [];
 
-arr.forEach(function(channel){
+function getAJAX(){
+  arr.forEach(function(twitchName){
+    $.ajax({
+      method: "GET",
+      url: "https://api.twitch.tv/kraken/channels/"+twitchName,
+      dataType: "jsonp",
+      async: false,
+      success: ajaxSucces,
+      error: function(){
+        console.log("error in AJAX get");
+      }
+    }) //end ajax
+  }) //end forEach
+}
 
-  $.ajax({
-    method: "GET",
-    url: "https://api.twitch.tv/kraken/streams/"+channel,
-    dataType: "jsonp",
-    success: function(data){
-      $.ajax({
-        method: "GET",
-        url: "https://api.twitch.tv/kraken/channels/"+channel,
-        dataType: "jsonp",
-        success: function(data){
-          groups.push(data);
-        },
-        error: function(){
-          console.log("error in channel get");
-        }
-      })
-    },
-    error: function(){
-      console.log("error in stream get");
-    }
-  }) //end ajax
+function ajaxSucces(data) {
+  var channelInfo = new Channel(data['display_name'], data.game, data.logo, data.url);
+  groups.push(channelInfo);
+}
 
-}) //end forEach
+// function appendHTML() {
+//   groups.forEach(function(channel){
+//     console.log('appending: '+channel.displayName);
+//     $(".row").append("<div>"+channel.displayName+"</div>");
+//   });
+// }
+
+getAJAX();
