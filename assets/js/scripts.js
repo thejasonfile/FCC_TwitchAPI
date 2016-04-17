@@ -12,7 +12,10 @@ function getAJAX(){
       } else {
         $.getJSON('https://api.twitch.tv/kraken/channels/'+twitchName+'?callback=?', function(data) {
           console.log(data);
-          HTMLstring = "<div class='col-md-3 running'><a href="+link+" target='_blank'><img src='"+data.logo+"'>"+twitchName + " is running " + data.game+"</a></div>";
+          HTMLstring = "<div class='col-md-3 running'><div class='row'><div class='col-md-4'>";
+          HTMLstring += "<img src='"+data.logo+"'>";
+          HTMLstring += "<div class='col-md-7'>";
+          HTMLstring += "<h1><a href="+link+" target='_blank'>"+twitchName+"</a></h1><p>"+data.game+"</p></div></div></div>";
           appendHTML(HTMLstring);
         });
       }
