@@ -1,0 +1,42 @@
+body {
+	background-color: #52526d
+}
+
+a,
+a:hover {
+	color: inherit;
+}
+
+img {
+	max-height: 100%;
+}
+
+.container {
+	margin-top: 2em;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.col-md-3 {
+	text-align: center;
+	padding: 0.4em;
+	border: 3px dashed black;
+	margin: 0.2em;
+	border-radius: 15px;
+	font-size: 2em;
+}
+
+.running {
+	background-color: #3d6020;
+	color: white;
+}
+
+.notRunning {
+	background-color: #7f0707;
+	color: black;
+}
+
