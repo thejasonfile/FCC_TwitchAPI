@@ -3,14 +3,18 @@ body {
 }
 
 a,
-a:hover {
+a:hover,
+a:visited {
 	color: inherit;
 }
 
 img {
 	max-height: 100%;
-	border-radius: 15px;
-	border: 3px dashed black;
+	border-radius: 100%;
+}
+
+.title {
+	text-align: center;
 }
 
 .container {
@@ -23,27 +27,30 @@ img {
 	justify-content: center;
 }
 
-.col-md-3,
-.col-md-4,
-.row {
-	padding: 0;
-	margin: 0;
-}
-
-.col-md-3 {
+.col-md-8 {
 	height: auto;
-	margin: 1em 0.4em;
 	padding: 1em;
 	border: 3px solid black;
 	border-radius: 15px;
+	max-width: 100%;
 }
 
+.col-md-2 {
+	height: 50px;
+}
+
+.col-md-2,
 .col-md-4 {
-	height: 100px;
+	display: flex;
+	align-items: center;
 }
 
-.col-md-7 {
-	margin-left: 1em;
+.twitchName {
+	font-size: 2em;
+}
+
+.game {
+	font-size: 1.4em;
 }
 
 .running {
@@ -53,6 +60,6 @@ img {
 
 .notRunning {
 	background-color: #7f0707;
-	color: black;
+	color: white;
 }
 
