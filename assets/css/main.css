@@ -68,3 +68,19 @@ img {
 	color: white;
 }
 
+/*---------------------
+MEDIA QUERIES
+----------------------*/
+
+@media screen and (max-width: 990px) {
+	.wrapper,
+	.col-md-8 {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+
+
+
+
