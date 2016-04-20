@@ -14,20 +14,10 @@ function getAJAX(){
           } else {
             imgSource = data.logo;
           }
-          HTMLstring = "<div class='col-md-8 notRunning'><div class='row'>";
-          HTMLstring += "<div class='col-md-2'><img src='"+imgSource+"'></div>";
-          HTMLstring += "<div class='col-md-4'><span class='twitchName'><a href="+link+" target='_blank'>"+twitchName+"</a></span></div>"
-          HTMLstring += "<div class='col-md-4'><span class='game'>Offline</span></div>";
-          HTMLstring += "</div></div></div>";
-          appendHTML(HTMLstring);
+          buildHTML('notRunning', imgSource, link, twitchName);
         });
       } else if (data.status === 422) {
-          HTMLstring = "<div class='col-md-8 undefined'><div class='row'>";
-          HTMLstring += "<div class='col-md-2'><img src='../TwitchAPI/assets/img/redx.png'></div>";
-          HTMLstring += "<div class='col-md-4'><span class='twitchName'><a href="+link+" target='_blank'>"+twitchName+"</a></span></div>"
-          HTMLstring += "<div class='col-md-4'><span class='game'>Account Closed</span></div>";
-          HTMLstring += "</div></div></div>";
-          appendHTML(HTMLstring);
+          buildHTML('undefined', '../TwitchAPI/assets/img/redx.png', link, twitchName);
       } else {
         $.getJSON('https://api.twitch.tv/kraken/channels/'+twitchName+'?callback=?', function(data) {
           if (data.logo === null) {
@@ -35,16 +25,24 @@ function getAJAX(){
           } else {
             imgSource = data.logo;
           }
-          HTMLstring = "<div class='col-md-8 running'><div class='row'>";
-          HTMLstring += "<div class='col-md-2'><img src='"+imgSource+"'></div>";
-          HTMLstring += "<div class='col-md-4'><span class='twitchName'><a href="+link+" target='_blank'>"+twitchName+"</a></span></div>"
-          HTMLstring += "<div class='col-md-4'><span class='game'>"+data.game+"</span></div>";
-          HTMLstring += "</div></div></div>";
-          prependHTML(HTMLstring);
+          buildHTML('running', imgSource, link, twitchName);
         });
       }     
     });
   }); 
+}
+
+function buildHTML(className, imgSource, link, twitchName) {
+  HTMLstring = "<div class='col-md-8 "+className+"'><div class='row'>";
+  HTMLstring += "<div class='col-md-2'><img src='"+imgSource+"'></div>";
+  HTMLstring += "<div class='col-md-4'><span class='twitchName'><a href="+link+" target='_blank'>"+twitchName+"</a></span></div>"
+  HTMLstring += "<div class='col-md-4'><span class='game'>Offline</span></div>";
+  HTMLstring += "</div></div></div>";
+  if(className === 'running'){
+    prependHTML(HTMLstring);
+  } else {
+    appendHTML(HTMLstring);
+  }
 }
 
 function appendHTML(HTMLstring) {
